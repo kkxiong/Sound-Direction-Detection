@@ -1,5 +1,7 @@
 # Sound-Direction-Detection
 This project is to implement a sound direction detection solution to guide the robot to orient to the sound source for further action.
+The hardware platform is Matrix (https://matrix-io.github.io/) + Raspberry Pi. The software for sound direction detection is ODAS. 
+The Matrix does sound capture and Raspberry calculates the angle of the sound direction and transmit to Robot via UART. The robot is running on Arduino board.
 
 Here are some implementation details:
 Steps to setup software:
@@ -25,3 +27,15 @@ Notes/Issues:
   3. The UART port name keeps changing among "ACM0", "ACM1", "ACM2" during the execution. I have a ugly workaround in uartproc.cpp.
   4. The matrix board doesn't fit to robot with all calbles plugged in.
   5. When matrix board sits on robot, there could be a angle detection confusion problem. For example, if the robot turns to 45 degrees direction when it hears a sound in that direction, if the sound keeps ringing there, the matrix board will detect "0 degree"  and pass this information to robot. Then robot will turn to "0 degree" which is not thwhere the sound comes from.  We need some compensation for the robot physical orientation.
+
+
+The steps to build this is below:
+1. install image on raspberry pi
+    1. https://matrix-io.github.io/matrix-documentation/matrix-creator/device-setup/
+2. install matrix software
+    1. https://matrix-io.github.io/matrix-documentation/matrix-core/getting-started/core-installation/
+    2. https://matrix-io.github.io/matrix-documentation/matrix-core/getting-started/python-installation/
+3. install audio software
+    1. https://matrix-io.github.io/matrix-documentation/matrix-creator/resources/microphone/
+4. install odas software
+    1. https://www.hackster.io/97259/direction-of-arrival-for-matrix-voice-creator-using-odas-b7a15b
